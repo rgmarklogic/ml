@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+//window.console.log("hello world!");
+console.log("Hello world!");
+
+// Make a chicken, that lays eggs.
+(function() {
+
+    // Primitive types: string, number, boolean, null, undefined
+    // complex types: Object, Function, Array, Date, RegExp, Error
+    var animalFactory = function(howMany) {
+        var i;
+        var animals = [];
+        for (i = 0; i < howMany; i++) {
+            animals.push(new Animal());
+        }
+        return animals;
+    };
+
+    // ECMAScript
+    // Objects in JavaScript
+    var Animal = function() {
+        this.feathers = true;
+        this.speak = function() {
+            return "blah blah";
+        };
+    };
+    var a = new Animal();
+    console.log("The animal says", a.speak());
+
+    var animals = animalFactory(10);
+    console.log(animals);
+    /*
+        function Animal() {
+            this.feathers = true;
+        }
+    */
+    var Chicken = function() {
+        this.feathers = false;
+        this.instanceDate = new Date();
+    };
+    Chicken.prototype = new Animal();
+    Chicken.prototype.constructor = Chicken;
+    Chicken.prototype.eat = function() {
+        return "cluck cluck";
+    };
+    Chicken.prototype.feathers = true;
+    Chicken.prototype.protoDate = new Date();
+    var c = new Chicken();
+    // Does Chicken behave like we assume?
+    console.log("chicken speaking", c.speak());
+    console.log("chicken eat", c.eat());
+    console.log("chicken has feathers", c.feathers);
+})();
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
+
+
+
+
+
+
+
+
