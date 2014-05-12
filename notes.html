@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+// Form on the page with a submit and a textarea
+// Form class that handles the submit of the form
+// A Note class that handles the parsing of notes
+window.onload = function() {
+
+    var Note = function(text) {
+        this.text = text;
+    };
+    Note.prototype.render = function() {
+        return "<div class='node'>"+this.text+"</div>";
+    };
+
+    var AwesomeForm = function(el) {
+        var self = this;
+
+        this.note = Note;
+        // TODO: setup the event listener so it correctly references this
+
+        // What is the this in onsubmit?
+        el.addEventListener("submit", function(e) {
+            // the this here === form
+            //var form = this;
+            //self.onsubmit(e, form);
+            self.onsubmit(e, this);
+        });
+    };
+    AwesomeForm.prototype.onsubmit = function(e, el) {
+        // Read the text from the form textarea
+        // Create a note from the textarea text
+        // Append the note to the #notes div as a string of HTML.
+        e.preventDefault();
+
+        t = el.querySelector("textarea").value;
+        document.querySelector("#notes").innerHTML += (new this.note(t)).render();
+    };
+
+    var af = new AwesomeForm(document.querySelector("form"));
+};
+        </script>
+    </head>
+    <body>
+        <form>
+            <textarea></textarea>
+            <input type="submit"/>
+        </form>
+        <div id="notes">
+        </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
