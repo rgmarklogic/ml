@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Web Dev</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/css/reveal.min.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/css/theme/night.css" id="theme">
+        <!-- For syntax highlighting of code. -->
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/lib/css/zenburn.css">
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides">
+
+<!-- A section contained within the .reveal > .slides container is a single slide. -->
+<section>
+    <h2>Web Dev</h2>
+    <ul>
+        <li>Instructor: Jeremy Osborne</li>
+        <li>Email: jeremywosborne@gmail.com</li>
+        <li>Phone: 408-655-3155</li>
+    </ul>
+    <p>Please download the class files from:</p>
+    <p><a href="https://db.tt/FiWNzh5C">https://db.tt/FiWNzh5C</a></p>
+    <p>OR</p>
+    <p>clone the git repository at:</p>
+    <p><a href="https://github.com/jeremyosborne/ml.git">https://github.com/jeremyosborne/ml.git</a></p>
+</section>
+
+<section>
+    <h2>Logistics</h2>
+    <ul>
+        <li>This is a 3 day course.</li>
+        <li>There will be a lunch, and 2 afternoon breaks.</li>
+        <li>Each day will end ~6pm.</li>
+        <li>The class will be very hands on.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Topics</h2>
+    <ul>
+        <li>Advanced Javascript</li>
+        <li>Node.JS</li>
+        <li>jQuery</li>
+        <li>AngularJS</li>
+    </ul>
+</section>
+            </div>
+        </div>
+
+        <!-- Below is the control code for Reveal. -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/lib/js/head.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.3/js/reveal.min.js"></script>
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'http://cdnjs.cloudflare.com/ajax/libs/reveal.js/2.5/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+    </body>
+</html>

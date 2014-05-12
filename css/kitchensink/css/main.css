@@ -1,0 +1,375 @@
+/*
+ * This is a Cascading Style Sheet (CSS).
+ *
+ * This text is written within the only type of comment in CSS.
+ *
+ * If you are new to CSS, I highly recommend referencing:
+ *
+ *     http://caniuse.com
+ *
+ * to check on any functionality concerns. CSS is rife with a history of
+ * functionality problems, many are worth memorizing.
+ *
+ * The "cascade" part of CSS is a bit tricky to comprehend, but influences
+ * the organization of a CSS file. Usually the more general stylings are
+ * at the top of the file and the more specific stylings are farther down
+ * the file. However the cascade is more than just the order of the rules,
+ * and a major component of the cascade is what is called specificity.
+ *
+ * Specificity might be mind-numbing in the beginning, but I highly recommend
+ * eventually reading about specificity in CSS, especially if you haven't
+ * yet done so AND you have been baffled why your CSS changes don't always
+ * seem to effect things.
+ *
+ * I'll list a few descriptions of specificity, with the first being the one
+ * with the most palatable description:
+ *
+ *     http://coding.smashingmagazine.com/2007/07/27/css-specificity-things-you-should-know/
+ *     http://www.stuffandnonsense.co.uk/archives/css_specificity_wars.html
+ *     http://www.w3.org/TR/2001/CR-css3-selectors-20011113/#specificity
+ *
+ */
+
+
+
+/*
+ * Contents of a CSS file are divided into small blocks of code that
+ * almost always have two parts.
+ *
+ * The first part is the selector. The selector tells us what elements
+ * on the page we are going to apply our styling to.
+ *
+ * Selectors can be complex, but this one is simple. If I were to
+ * translate this selector into human language, I would say:
+ *
+ *     Grab all of the elements on the page and to them apply the
+ *     CSS rules within the curly braces.
+ *
+ * This asterisk is the "universal selector".
+ */
+* {
+    /*
+     * I'm going to postpone the longer conversation about why you might
+     * want to set this until various pieces of the box-model.
+     *
+     * Short version: This simplifies dimension arithmetic on containers.
+     *
+     * For those that can't wait, longer description of the box model:
+     *
+     *     http://www.w3.org/TR/CSS2/box.html
+     *
+     * And why you might want to use box-sizing:
+     *
+     *     http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+     *
+     * A note on the hyphenated prefixes and why there are 3:
+     * At the time of writing, we are still in the throes of a way of
+     * beta testing new functionality gone wrong, known as vendor prefixes.
+     * The short story: this was a good idea that allowed developers a
+     * way to "beta test" new technology. However, what was supposed to
+     * be beta testing led to essentially no more than a "star hack" to
+     * get various rules working.
+     *
+     * The main vendor prefixes you may see are:
+     *
+     * -moz- for Mozilla (Firefox).
+     * -ms- for Microsoft Internet Explorer.
+     * -o- for Opera (at the time of writing).
+     * -webkit- for Webkit based browsers like Chrome (at the time of
+     * writing), Safari in all its forms, Android browsers, and in the
+     * near future also Opera.
+     *
+     * The reason for the organization of vendor prefixed CSS:
+     * In CSS is not illegal (not even at the warning level) to include
+     * the same CSS rule in a CSS block. The last CSS rule will win.
+     * Rules the browser does not understand are ignored.
+     *
+     * The standard, non-prefixed version is placed last, in the hopes
+     * that when the standard is finally adopted by the browser, the
+     * rule will not have changed and the standard rule is the most
+     * correct.
+     */
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+/*
+ * If I were translate this next selector into English, I would describe
+ * it as:
+ *
+ *     Grab all of the body elements on the page and apply the CSS rules
+ *     in the curly braces to the body element.
+ *
+ * A well formed HTML page can only have 1 body element, so we're only
+ * effecting that one element.
+ */
+body {
+    /*
+     * Changes the background color of this element.
+     *
+     * There are many ways to add colors in CSS. Some are:
+     *
+     * #rrggbb; (hash required, r = red, g = green, b = blue, hex notation 0-F)
+     * #rgb; (shorthand notation, #f0f means #ff00ff)
+     * rgb(r, g, b); (0-255 instead of hex)
+     * rgba(r, g, b, a); (like rgb, except with alpha: 0 transparent -> 1 opaque)
+     * hsla(h, s, l, a); (using the hue-saturation-lightness cylindrical-coordinate system)
+     * pink; (lots of words are acceptable for colors)
+     */
+    background-color: #eee;
+
+    /*
+     * Background images can be added directly to elements in addition
+     * to the img tags we have in our page.
+     *
+     * The url of a background image is relative to the CSS file, not
+     * the HTML file loading it.
+     *
+     * Multiple background images can be included (CSS3) by comma delimited
+     * list.
+     */
+    background-image: url('../img/background2.jpg'), url('../img/background.png');
+    /*
+     * Images are repeated (tiled) by default. Single rule applies to all
+     * images.
+     */
+    background-repeat: no-repeat;
+    /*
+     * Positioning in CSS is always relative to something. Keywords or
+     * lengths can be used.
+     *
+     * Comma delimiting our values allow us to position our list of
+     * background images individually.
+     */
+    background-position: 0% bottom, right bottom;
+}
+
+/*
+ * Some pseudo-classes (I also refer to them as potential states) are
+ * defined by CSS. Psuedo-classes are prefixed by a colon.
+ *
+ * Links have more than the usual number of states associated with them.
+ *
+ * A comma in a selector is an inclusive or, where all these types of
+ * anchor tags will receive these rules.
+ */
+a, a:link, a:visited {
+    /*
+     * Make the link the same color whether it has been visited or not.
+     */
+    color: #3333aa;
+    /*
+     * Remove the underline from under a link.
+     */
+    text-decoration: none;
+}
+/*
+ * Links can have an active state (likely imperceptible) and a hover state,
+ * or when the mouse is hovering over them. In the days and age of touch
+ * based screens, and non-mouse based pointers, please note that :hover
+ * is not as all inclusive in terms of interactive as it used to be.
+ * Remember to test if you insist on using :hover.
+ *
+ * Since this rule block uses a set of selectors that are equal weight or
+ * heavier than the previous rule block, and they occur farther down the
+ * file (for the equal weighted selectors), the rules inside the selector
+ * will overwrite the previous block of
+ *
+ *     a, a:link, a:visited
+ *
+ * rules, providing the effect of an underline that appears on mouseover.
+ */
+a:active, a:hover {
+    /*
+     * Apply the underline back when we are hovering/clicking the link.
+     */
+    text-decoration: underline;
+}
+
+
+footer {
+    /*
+     * Alignment of inline content within our element. Note: This doesn't
+     * necessarily center contained elements, just contained inline content.
+     */
+    text-align: center;
+    font-size: 80%;
+}
+
+
+/*
+ * The dot is a special character in selectors that means class. Here it's
+ * find all elements on the page with a class of banner.
+ */
+.banner {
+    color: white;
+    text-align: right;
+    background-color: #222;
+    /*
+     * Margin is the transparent space outside of an element, beyond the
+     * border, that can be used to space elements apart from each other.
+     * The banner is an h1 element, which normally has top and bottom
+     * margin, so we turn it off (length of 0).
+     */
+    margin: 0;
+    /*
+     * Padding is the extra spacing between the border of the element and
+     * the content of the element. While there are four padding sides to
+     * consider -- top, right, bottom, left -- a single number is applied
+     * to all sides uniformly.
+     *
+     * There are various sizing units available. I personally like em values
+     * and percentages, which are relative values. A decent discussion of
+     * em values can be found:
+     *
+     *      http://en.wikipedia.org/wiki/Em_%28typography%29
+     *
+     * Think of ems like a relative scalar that are based on the inherited
+     * font size. Each side of padding is the size of 100% of the font size
+     * of the h1 tag (which should be ~32px on browsers).
+     */
+    padding: 1em;
+    /*
+     * Border is located between margin and padding, and is invisible by
+     * default on most elements. Border needs a size, style, and color.
+     *
+     * Padding, border, margin and other settings can be applied to certain
+     * sides only, or to the entire element. This rule applies the border
+     * to just the bottom.
+     */
+    border-bottom: 1px solid #444;
+
+    /*
+     * At the time of this writing, people still distinguish CSS 3 because
+     * it is still relatively new compared to CSS 2.1. The following CSS 3
+     * rule applies a drop shadow below our header. Unlike the box-sizing,
+     * we leave off the vendor prefixes because we don't even want to
+     * support the older browsers that used vendor prefixes.
+     *
+     * We apply more than one shadow (comma delimited, repeated rule).
+     */
+    box-shadow: 0px 2px 2px black,
+                0px 4px 4px rgb(33, 33, 33),
+                0 6px 8px rgba(33, 33, 33, 0.5);
+}
+
+
+
+.main-nav {
+    margin-top: 1em;
+}
+.main-nav ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+.main-nav li {
+    display: inline-block;
+}
+.main-nav li:hover {
+    font-weight: bold;
+}
+.main-nav a {
+    color: white;
+    display: inline-block;
+    width: 14em;
+    padding: 0.5em;
+
+    text-align: center;
+
+    background-color: rgb(33, 33, 33);
+    border: 1px solid #aaa;
+}
+
+
+
+#book-specials {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1em;
+    overflow: hidden;
+
+    background-color: rgba(255, 255, 255, 0.8);
+}
+#book-specials .dual-column {
+    float: left;
+}
+#book-specials .dual-column:first-child {
+    width: 60%;
+}
+#book-specials .dual-column:last-child {
+    width: 40%;
+}
+#book-specials table {
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    box-shadow: 3px 3px 3px #ccc;
+}
+#book-specials table tr {
+    border: 1px solid #333;
+}
+#book-specials table td {
+    padding: 0 1em;
+}
+
+
+
+#news {
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+
+    background-color: rgba(255, 255, 255, 0.8);
+}
+#news > .dual-column {
+    float: left;
+    width: 50%;
+    padding: 1%;
+}
+
+
+
+#feedback {
+    position: fixed;
+    top: 400px;
+    left: -170px;
+
+    z-index: 1;
+}
+#feedback:hover {
+    left: 0px;
+}
+
+
+
+.fancy-quote {
+    position: relative;
+    padding: 2em;
+    background-color: #fff;
+}
+.fancy-quote:before {
+    display: block;
+    position: absolute;
+    top: -0.15em;
+    left: 0.05em;
+
+    content: "\201C";
+    color: #ddd;
+    font-size: 6em;
+    font-family: serif;
+}
+.fancy-quote:after {
+    display: block;
+    position: absolute;
+    bottom: -0.5em;
+    right: 0.05em;
+
+    content: "\201D";
+    color: #ddd;
+    font-size: 6em;
+    font-family: serif;
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Selector Specificity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" rel="stylesheet"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet"/>
+        <style id="example-code">
+/* CSS selector specificity is a bit bizarre, and I find it easier to explain
+   with an example. It may not be immediately obvious how the selectors
+   apply to the HTML in the example so it is copied below for reference.
+
+    <ul>
+        <li id="story-extra"
+            class="story extra">
+            Story Extra
+        </li>
+        <li id="miss-pross"
+            class="character miss pross">
+            Miss Pross
+        </li>
+        <li id="doctor-manette"
+            class="character doctor manette">
+            Doctor Manette
+        </li>
+        <li id="lucie-manette"
+            class="character lucie manette">
+            Lucie Manette
+        </li>
+        <li id="madame-defarge"
+            class="character madame defarge"
+            style="color: red;">
+            Madame Defarge
+        </li>
+        <li id="sydney-carton"
+            class="character sydney carton redeemed"
+            style="color: red;">
+            Sydney Carton
+        </li>
+    </ul>
+
+    I recommend reading the notes about the applied CSS from the bottom up.
+    I've purposely reversed my usual ordering of selectors by putting the
+    most general at the bottom and the most specific (or the ones with the
+    most specific rules) at the top. This is to dispel the notion that the
+    overriding factor of cascade is the order of the CSS rules. The order
+    of the CSS rule groups is important, but only when the selectors are of
+    equal specificity.
+ */
+
+
+
+/*  Finally (assuming you have been reading the comments from the buttom up)
+    we have the maligned bang-important selector. This doesn't mean "not
+    important" and in fact means the polar opposite "very, very important."
+    We demonstrate this by association with a single class selector that
+    will select Sydney Carton. Sydney has an inline style for the foreground
+    color (heavy specificity), and is subject to other selectors on the
+    page. But we see here that, even though a class selector is less specific
+    than an inline style, the color rule with the !important is given higher
+    weighting compared to other color rules, no matter where the other color
+    rules occur.
+
+    A !important rule can only be overridden by another !important rule that
+    occurs later in the cascade. Since we have no more !important rules,
+    this rule wins and Sydney will be listed in purple text.
+
+    If we had rewritten the close of A Tale of Two Cities in the spirit of
+    writing CSS, we might have had Sydney Carton propagandize:
+
+    "Having not ever used bang-important is a far, far better thing I do than
+    I have ever done..." */
+.redeemed {
+    color: purple !important;
+}
+/*  We would assume the Madame Defarge would, deservingly, display
+    her black heart through her foreground color. But no, Madame Defarge
+    would only ever display red in public, and her inline styling
+    (please see the reprinted HTML above) of red is the only color she will
+    display publicly.
+
+    Inline styling within the style attribute will be more specific,
+    and will win out in the cascade even over ID selectors. */
+#madame-defarge {
+    color: black;
+}
+/* ID selectors are a quantum level heavier than class and body selectors,
+   and as such will always be more specific. While Lucie is definitely a
+   character and a Manette, she will be listed in green because a more
+   specific selector gets applied to her. */
+#lucie-manette {
+    color: green;
+}
+/* And of course, two class selectors are heavier than one (same quantum
+   level). Since this selector is heavier than the others that follow in the
+   cascade, it wins and Dr. Manette is gray. */
+.character.manette {
+    color: gray;
+}
+/*  Class selectors are a quantum level heavier than element selectors. A
+    lone class selector is heavier than a selector made up of any number
+    of element selectors. Miss Pross, as she has no heavier selector applied
+    to her, should be orange, and not blue or pink. */
+.character {
+    color: orange;
+}
+/*  This selector, having two elements in it, is heavier than the general
+    selector applied to the unordered list. We should see that the story
+    extra, whom gets no other selectors applied to it, will have foreground
+    color of blue, not pink. Even though this selector appears above the
+    general selector, the fact that it has a heavier weight (two elements vs.
+    1 element) means that it wins in the cascade. */
+ul li {
+    color: blue;
+}
+/*  The makeup of the CSS selector as a whole determines how specific it is,
+    or how much priority it has in the cascade. At the lowest level of weight
+    is the universal selector denoted by the asterisk. We're starting off
+    by setting the foreground color of all descendents to be pink. Even
+    though this rule appears last, no list item content should be pink.
+    The star selector, while universal, has zero weight and will
+    not make your selector more specific. */
+ul * {
+    color: pink;
+}
+/* General settings for the sample list. Can be ignored for the
+   specificity discussion. */
+ul {
+    width: 300px;
+    background-color: white;
+    margin: 3em auto;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+        </style>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
+        <script>
+/*
+ * Source code, not programmatically generated. Used by the examples.
+ */
+$(document).ready(function() {
+    // Code highlighting produces an HTML string output.
+    var code = $("#example-code").html();
+    var highlighted = hljs.highlight( "css", code.trim() ).value
+    $("<div class='example-code-display'><p>Example Code<p><pre><code class='css'></code></pre></div>")
+        .find(".css")
+        // Insert our syntax highlighted code into the correct container.
+        .html(highlighted)
+        // Get back to the container div.
+        .parent().parent()
+        .appendTo("body");
+
+    // Insert the title into the page as the header dynamically.
+    // Allows me to write the title once since I'm writing the html by hand
+    // for right now.
+    $("<header><h1></h1></header>")
+        .find("h1")
+        .append( $("title").html() )
+        .parent()
+        .prependTo("body");
+});
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <div class="warning">
+                Example description is rendered dynamically with JavaScript. Please enable JavaScript to see the explanation.
+            </div>
+        </noscript>
+        <ul>
+            <li id="story-extra"
+                class="story extra">
+                Story Extra
+            </li>
+            <li id="miss-pross"
+                class="character miss pross">
+                Miss Pross
+            </li>
+            <li id="doctor-manette"
+                class="character doctor manette">
+                Doctor Manette
+            </li>
+            <li id="lucie-manette"
+                class="character lucie manette">
+                Lucie Manette
+            </li>
+            <li id="madame-defarge"
+                class="character madame defarge"
+                style="color: red;">
+                Madame Defarge
+            </li>
+            <li id="sydney-carton"
+                class="character sydney carton redeemed"
+                style="color: red;">
+                Sydney Carton
+            </li>
+        </ul>
+    </body>
+</html>

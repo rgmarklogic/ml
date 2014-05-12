@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Positioning</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" rel="stylesheet"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet"/>
+        <style id="example-code">
+/*  This page attempts to demonstrate the various effects of CSS positioning. */
+
+
+/*  Control element has static positioning (the default). */
+#control {
+    /* no operation. */
+}
+/*  An element with static positioning is at the mercy of the browser render
+    engine of the browser.
+    E.g. if we set a top, left, right, or bottom, the element will not move. */
+#position-fail {
+    top: 50px;
+    right: 50px;
+}
+
+/*  The following two elements have the body element has a parent element.
+
+    One element is given absolute positioning, the other element is given
+    fixed positioning. If the browser has not been scrolled, than both
+    elements will be positioned at the same location, one overlapping the
+    other.
+
+    As we scroll we see:
+
+    fixed positioning is relative to the viewport of the browser (the
+    currently viewable area).
+
+    absolute positioning is relative to a containing block. Here, the
+    containing block is the page itself.
+
+    The more positive the "left" setting, the farther from the left (towards
+    the right) the element will be pushed.
+
+    The more positive the "top" setting, the farther from the top (towards
+    the bottom) the element will be pushed.
+
+    Fixed and absolutely positioned elements remove themselves from the
+    flow of the page and do not directly affect the layout of other elements. */
+#page-fixed {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+
+    background-color: #003056;
+}
+#page-absolute {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+
+    background-color: #003056;
+}
+/*  Relative means "relative to wherever the element would have been laid out
+    if it was statically positioned." The following element is contained within
+    an element and it is positioned relative to where it would have been
+    laid out.
+
+    The more positive the "right" setting, the farther from the right
+    (towards the left) the element will be pushed.
+
+    The more positive the "bottom" setting, the farther from the bottom
+    (towards the top) the element will be pushed. */
+#static-contained-relative {
+    position: relative;
+    right: 50px;
+    bottom: 50px;
+
+    background-color: #F2D03B;
+    color: black;
+}
+/*  Absolutely position an element contained within a statically positioned
+    element. It still gets positioned relative to the page.
+
+    Reason: absolute means relative to the first non-static positioning parent
+    element, or the document. */
+#static-contained-absolute {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+
+    background-color: #F2D03B;
+    color: black;
+}
+/*  Absolute positioning is relative to the first containing object that
+    is not static positioned. Since the container of this specific element
+    has been given relative positioning (a non-static positioning), this
+    element is positioned relative to it's immediate parent. */
+#relative-contained-absolute {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+
+    background-color: #F2D03B;
+    color: black;
+
+    padding-top: 2em;
+}
+/*  Some of our test elements will have a container. */
+.test-container {
+    height: 8em;
+    width: 8em;
+    margin: 0 auto;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+/*  Some test containers might be given relative positioning. */
+.relative-position-parent {
+    position: relative;
+}
+/*  All of our test elements will have a basic style applied to them. */
+.test {
+    height: 8em;
+    width: 8em;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+    padding-top: 3em;
+}
+/*  Extend the size of the body element to allow for scrolling. This will
+    aid in demonstrating fixed vs. other types of positioning. */
+body {
+    min-height: 3000px;
+}
+        </style>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
+        <script>
+/*
+ * Source code, not programmatically generated. Used by the examples.
+ */
+$(document).ready(function() {
+    // Code highlighting produces an HTML string output.
+    var code = $("#example-code").html();
+    var highlighted = hljs.highlight( "css", code.trim() ).value
+    $("<div class='example-code-display'><p>Example Code<p><pre><code class='css'></code></pre></div>")
+        .find(".css")
+        // Insert our syntax highlighted code into the correct container.
+        .html(highlighted)
+        // Get back to the container div.
+        .parent().parent()
+        .appendTo("body");
+
+    // Insert the title into the page as the header dynamically.
+    // Allows me to write the title once since I'm writing the html by hand
+    // for right now.
+    $("<header><h1></h1></header>")
+        .find("h1")
+        .append( $("title").html() )
+        .parent()
+        .prependTo("body");
+});
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <div class="warning">
+                Example description is rendered dynamically with JavaScript. Please enable JavaScript to see the explanation.
+            </div>
+        </noscript>
+        <div id="control" class="test">control</div>
+        <div id="position-fail" class="test">position fail</div>
+        <div id="page-fixed" class="test">page fixed</div>
+        <div id="page-absolute" class="test">page absolute</div>
+        <div class="test-container">
+            <div id="static-contained-relative" class="test">static contained relative</div>
+        </div>
+        <div class="test-container">
+            <div id="static-contained-absolute" class="test">static contained absolute</div>
+        </div>
+        <div class="test-container relative-position-parent">
+            <div id="relative-contained-absolute" class="test">relative contained absolute</div>
+        </div>
+    </body>
+</html>

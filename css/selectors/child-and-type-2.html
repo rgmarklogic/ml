@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Child and Type Selectors</title>
+    <meta charset="ISO-8859-1">
+    <style>
+/* This file uses a majority of the child and type selectors in the CSS 3
+ * selector specification. Some of the uses are contrived, but this example
+ * is about understanding the semantics of child and selectors and how they
+ * work.
+ */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-family: sans-serif;
+}
+header > h1 {
+    padding: 1em;
+    background-color: #eee;
+    margin: 0;
+    text-align: right;
+}
+table {
+    margin: 2em auto;
+    border-collapse: collapse;
+}
+table th {
+    text-align: left;
+}
+table td, table th {
+    padding: 0.4em;
+}
+/* if there was more than one caption, this would fail. */
+table caption:only-of-type {
+    background-color: #333;
+    color: white;
+    padding: 0.3em;
+}
+/* Use the first-of-type and last-of-type selectors to add a border around
+   the left and right edges. */
+table td:first-of-type, table th:first-of-type {
+    border-left: 2px solid black;
+}
+table td:last-of-type, table th:last-of-type {
+    border-right: 2px solid black;
+}
+/* Tiger stripe the rows. even | odd | xn+y are valid formulas. */
+table tbody tr:nth-child(odd) td {
+    background-color: #eee;
+}
+/* Underline the countries (second td in each tr (implied) of the tbody) */
+table tbody td:nth-of-type(2) {
+    text-decoration: underline;
+}
+/* Underline the last row of the table. */
+table tbody tr:nth-last-child(1) td {
+    border-bottom: 2px solid black;
+}
+/* First child td of the tfoot. */
+table tfoot :first-child {
+    text-align: right;
+    font-weight: bold;
+}
+/* Last child td of the tfoot. */
+table tfoot :last-child {
+    text-align: left;
+    font-weight: bold;
+}
+/* Select the last tr of the table footer. */
+table tfoot tr:nth-last-of-type(1) td {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    text-align: center;
+    font-size: 0.6em;
+    color: #aaa;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wine Statistics</h1>
+    </header>
+    <table>
+        <caption>
+            Wine production by country 2007
+        </caption>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Country</th>
+                <th>Production (tonnes)</th>
+            </tr>            
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>France</td>
+                <td>4,711,600</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Italy</td>
+                <td>4,251,380</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Spain</td>
+                <td>3,520,870</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>United States</td>
+                <td>2,259,870</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Argentina</td>
+                <td>1,504,600</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>China (People's Republic)</td>
+                <td>1,450,000</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Germany</td>
+                <td>1,026,100</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>South Africa</td>
+                <td>978,269</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Australia</td>
+                <td>961,972</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Chile</td>
+                <td>791,794</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">World</td>
+                <td>26,416,532</td>
+            </tr>
+            <tr>
+                <td colspan="3"><small>Wine data courtesy of Wikipedia</small></td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

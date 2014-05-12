@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pseudo content</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" rel="stylesheet"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet"/>
+        <style id="example-code">
+.quoted {
+    /* Make the blockquote the containing block for positioning. */
+    position: relative;
+    padding: 3em;
+    background-color: #fff;
+    color: #333;
+}
+/* :before and :after pseudo content are like spans inserted within the parent
+   container, before and after the content. */
+.quoted:before {
+    /* Since the blockquote is relatively positioned, we can treat the upper
+       left of the blockquote as 0,0 in terms of positioning. */
+    position: absolute;
+    top: -0.15em;
+    left: 0.05em;
+
+    /* Choose a font that contains fancy quotes. */
+    font-family: serif;
+    font-size: 6em;
+    /* Pseudo content can't use normal HTML entities, but can use escaped
+       unicode values.
+       The following is a left double quotation mark (curly).
+       See:
+       http://www.evotech.net/blog/2007/04/named-html-entities-in-numeric-order */
+    content: "\201C";
+    opacity: 0.2;
+}
+.quoted:after {
+    position: absolute;
+    bottom: -0.5em;
+    right: 0.05em;
+
+    font-family: serif;
+    font-size: 6em;
+    content: "\201D";
+    opacity: 0.2;
+}
+        </style>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
+        <script>
+/*
+ * Source code, not programmatically generated. Used by the examples.
+ */
+$(document).ready(function() {
+    // Code highlighting produces an HTML string output.
+    var code = $("#example-code").html();
+    var highlighted = hljs.highlight( "css", code.trim() ).value
+    $("<div class='example-code-display'><p>Example Code<p><pre><code class='css'></code></pre></div>")
+        .find(".css")
+        // Insert our syntax highlighted code into the correct container.
+        .html(highlighted)
+        // Get back to the container div.
+        .parent().parent()
+        .appendTo("body");
+
+    // Insert the title into the page as the header dynamically.
+    // Allows me to write the title once since I'm writing the html by hand
+    // for right now.
+    $("<header><h1></h1></header>")
+        .find("h1")
+        .append( $("title").html() )
+        .parent()
+        .prependTo("body");
+});
+        </script>
+	</head>
+	<body>
+        <noscript>
+            <div class="warning">
+                Example description is rendered dynamically with JavaScript. Please enable JavaScript to see the explanation.
+            </div>
+        </noscript>
+        <blockquote class="quoted">
+           It is a far, far better thing that I do, than I have ever done;<br>
+           it is a far, far better rest that I go to than I have ever known.
+        </blockquote>
+	</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!--
+    HTML stands for "Hypertext Markup Language."
+    
+    What's a markup language?
+    
+        http://en.wikipedia.org/wiki/Markup_language
+        
+    The first line of an HTML page should be the declaration of the doctype.
+    
+    Why a doctype?
+    
+        http://www.quirksmode.org/css/quirksmode.html
+        http://en.wikipedia.org/wiki/Quirks_mode
+    
+    This is a comment. Comments are not (usually) removed from the code and
+    can be seen by anyone viewing your page source. They are invisible.
+    
+    Each HTML document should have one html tag enclosing everything.
+    
+    Each tag can have attributes. We are declaring that our page is in
+    English. See:
+        
+        http://www.w3.org/International/questions/qa-choosing-language-tags
+-->
+<html lang="en">
+    <!--
+        Every HTML document can and should have one head tag, after html
+        and before body.
+    -->
+    <head>
+        <!--
+            Declare the encoding of this file. It's more important that 
+            the server declares the encoding correctly in the HTTP Headers 
+            and that the file is saved using that encoding.
+            
+            I often use UTF-8, and make my editors do the same. See:
+            
+                http://en.wikipedia.org/wiki/Utf-8
+                
+            Note about different tags or elements. See:
+            
+                http://www.w3.org/TR/html-markup/syntax.html#syntax-elements
+
+            In summary, there are essentially two kinds of elements that we'll
+            use: void elements and non-void elements.
+            
+            Head is an example of a non-void element, and it will always
+            have a start and end tag, like so:
+            
+                <head>
+                    ...stuff goes here...
+                </head>
+            
+            The meta tag, like the one we have below, is a void element.
+            It never has an end tag, it will only have a start tag.
+            Void elements, like img, meta, hr, br, etc... can be written
+            in the following ways:
+            
+                <meta charset="UTF-8">
+            
+            or
+            
+                <meta charset="UTF-8"/>
+            
+            The first way is a void tag valid in HTML. The
+            second is a self-closing tag, valid for HTML XML parsers. 
+            Browsers don't actually care how you style your tags 
+            nowadays. I am a bit old school, and have bizarre reasons 
+            for using a self-closing tag, but don't worry, you don't
+            have to.
+        -->
+        <meta charset="UTF-8"/>
+        <!--
+            The web is not just on desktops and laptops anymore. We set
+            ourselves up to have more understandable CSS (IMO) on mobile
+            devices. See:
+            
+                http://www.quirksmode.org/mobile/viewports.html
+                http://www.quirksmode.org/mobile/viewports2.html
+                http://www.quirksmode.org/blog/archives/2010/09/combining_meta.html
+        -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!--
+            CSS files can be linked or embedded. In general, it is better to
+            link CSS files. This costs us 1 HTTP request but the potential
+            benefits are well summarized here:
+            
+                http://developer.yahoo.com/performance/rules.html
+                
+            The rel attribute is important. Do not leave it off.
+            
+            This CSS file is a third party file to normalize cross browser
+            differences. See:
+            
+                http://necolas.github.io/normalize.css/
+            
+            Compiled code writers have always had cross platform porting
+            to worry about (e.g. making Windows code run on OS X).
+            Web page developers have to "port" code between different
+            browsers. As time marches on, making a web page compatible
+            across browsers is getting easier, but probably will never
+            disappear entirely.
+            
+            There are different ways to normalize and reset the CSS
+            rules across different browsers. I prefer what normalize.css
+            does, and I also like that I can include their code and
+            not have to write it from scratch. Sharing is caring.
+            
+            This file contains no additional comments as I will not modify
+            it from the original source code.
+        -->
+        <link href="css/normalize.css" rel="stylesheet"/>
+        <!--
+            An additional CSS file that contains the styling specific to
+            our page. This style is developed by us for our own needs.
+            
+            Your page can have as many CSS files as you wish to place in
+            it (however, remember HTTP requests are "expensive" in terms
+            of performance, it's best to not make too many of them if
+            you can avoid it).
+            
+            In real life, I would probably combine these two CSS files into
+            one CSS file to cut down on the number of HTTP requests required
+            to get our code. For this example, I will keep the files
+            separate to make it easier for me to update the example.
+            
+            This file will contain as many CSS comments as I can think to
+            put in to describe what's happening in the (absurd) world of 
+            CSS.
+        -->
+        <link href="css/main.css" rel="stylesheet"/>
+        <!--
+            The title is displayed in the window/tab.
+            
+            We use an HTML Entity to mark the ampersand (which is itself a 
+            special character in our markup). See:
+            
+                http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
+        -->
+        <title>Books &amp; Beyond</title>
+        <!--
+            I don't usually use any other meta tags, except in special 
+            instances. See:
+            
+                http://support.google.com/webmasters/bin/answer.py?hl=en&answer=79812
+        -->
+    </head>
+    <!--
+        Each HTML document should contain only one body tag. Visible content 
+        goes in it.
+    -->
+    <body>
+
+        <!--
+            HTML5 introduced new semantic elements. See:
+            
+                http://diveintohtml5.info/semantics.html
+                
+            This will be the header of our page.
+        -->
+        <header>
+            <!--
+                Elements can have class and id attributes. Make sure the
+                value of your ids is unique if you use them. Classes are
+                meant to be reusable identifiers. 
+            -->
+            <h1 class="banner">Books &amp; Beyond</h1>
+        </header>
+
+        <!--
+            Main navigation bar for the page.
+        -->
+        <nav class="main-nav">
+            <!-- 
+                Unordered and ordered lists get used a lot to organize stuff.
+                Be ready to undo the default styling (as well as undo the
+                default styling of anything you don't like within your CSS).
+            -->
+            <ul>
+                <li>
+                    <a href="index.html">Our Books</a>
+                </li>
+                <li>
+                    <a href="http://www.gutenberg.org/">More Books</a>
+                </li>
+                <li>
+                    <a href="http://www.wikibooks.org/">Even More Books</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!--
+            There are times we need structure for our own styling 
+            and layout purposes.
+            divs and spans are great for this.
+        -->
+        <div id="book-specials">            
+            <section class="dual-column">
+                <h1>Our Current Book Specials</h1>
+                <!--
+                    When you have tabular data, use tables.
+                -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book</th><th>Author</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><em>Hello World!</em></td><td>by Ima Programmer</td>
+                        </tr>
+                        <tr>
+                            <td><em>Recursions</em></td><td>by Fib Onnachi</td>
+                        </tr>
+                        <tr>
+                            <td><em>1 &lt; 0</em></td><td>by D. Null</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <!--
+                                Some things cannot be done in CSS, like
+                                merging columns/rows.
+                            -->
+                            <td colspan="2">Ask about our bookworm program.</td>
+                        </tr>
+                    </tfoot>                
+                </table>
+                <p>
+                    What people are saying about our current book specials:
+                </p>
+                <blockquote class="fancy-quote">
+                    I find the books useful in helping me write bugs.
+                    <br/>
+                    -- Edsger Dijkstra
+                </blockquote>
+            </section>
+            <section class="dual-column">
+                <h1>Polling for prizes</h1>
+                <!--
+                    Forms have always been very powerful in HTML, even 
+                    without JavaScript.
+                    
+                    The action is the URL where this form will be submitted
+                    to. We turn off browser based validation using a boolean
+                    attribute (allowed in HTML, disallowed in XML/XHTML).
+                -->
+                <form action="apis/poll" novalidate>
+                    <!-- 
+                        Forms are one of the few places to still use a name
+                        attribute. No name attribute, the input field is
+                        assumed to be for looks only and will not be
+                        sent to the server by default.
+                    -->
+                    <fieldset>
+                        <legend>What popular book are you currently reading?</legend>
+                        <ol>
+                            <li class="form-radio-row">
+                                <!--
+                                    Most of our tags up until this point have been
+                                    block type of elements, with a few exceptions.
+                                    Inline elements, like input and label, can
+                                    be on different lines and still wind up on
+                                    the same line when the HTML is displayed.
+                                    
+                                    HTML/CSS have a lot of subtleties to be 
+                                    aware of. There really aren't any good
+                                    articles that I know of about display, but
+                                    experiment with display when you get to
+                                    CSS (as we will do in this example).
+                                -->
+                                <input type="radio" name="popular-book" 
+                                    id="2_Shades_of_Boolean"
+                                    value="2 Shades of Boolean"/>
+                                <!-- 
+                                    There is lots of discussion about accessibility
+                                    on the web. Here's my view of it: if you
+                                    have a simple web page, like we do, you
+                                    should make sure your page is accessible.
+                                    See:
+                                    
+                                        http://www.nczonline.net/blog/2009/11/10/introduction-to-web-accessibility/
+                                    
+                                    All inputs should have a label. It's stupid
+                                    and annoying to give all inputs an id and
+                                    a name, but luckily most of our HTML 
+                                    nowadays will be programmatically generated.
+                                -->
+                                <label for="2_Shades_of_Boolean">2 Shades of Boolean</label>
+                            </li>
+                            <li class="form-radio-row">
+                                <input type="radio" name="popular-book" value="What is your favorite RGB?"/>
+                                <label>What is your favorite RGB?</label>
+                            </li>
+                            <li class="form-radio-row">
+                                <input type="radio" name="popular-book" value="Common, but Not Normalized"/>
+                                <label>Common, but Not Normalized</label>
+                            </li>
+                        </ol>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Personal information:</legend>
+                        <ol>
+                            <li class="form-row">
+                                <label for="name">Name:</label>
+                                <input type="text" name="name" id="name" 
+                                    placeholder="Firstname Lastname"/>
+                            </li>
+                            <li class="form-row">
+                                <label for="email">Email:</label>
+                                <!--
+                                    There will always be some features that
+                                    you want to use that aren't completely
+                                    supported on the web. Placeholders
+                                    don't ruin anything: no support, blank
+                                    input field. No problem.
+                                -->
+                                <input type="email" name="email" id="email" 
+                                    placeholder="youremail@yourdomain.com"/>
+                            </li>
+                        </ol>
+                    </fieldset>
+                    <!--
+                        Forms need submit buttons. The value in this case
+                        displays what is visible as text in the button.
+                    -->
+                    <input type="submit" value="submit"/>
+                </form>
+            </section>
+        </div>
+
+        <div id="news">
+            <section class="dual-column">
+                <h1>What is Books &amp; Beyond?</h1>
+                <p>
+                    Some say it's a bookstore. Some call it a music shop, while others think of it as a great place to meet and relax. Books &amp; Beyond has become a unique phenomenon that offers this area's largest selection of sale books and music, with an inventory of CDs and tapes ranging from classical to independent-label rock and everything in between.
+                </p>
+                <p>
+                    What makes us different is our atmosphere. We encourage you to relax with a book in one of our quiet rooms, or take some reading material into our Coffee and Juice Bar to read while snacking. Think of Books &amp; Beyond as your own den.
+                </p>
+            </section><!--
+                This comment between the sections is purposeful to remove
+                the effective white space. This is due to the fact I'll
+                be using inline-blocks for styling these columns.
+            --><section class="dual-column">
+                <h1>Why go to any other book store?</h1>
+                <p>
+                    Need some quiet time away from your home or office? Need to put the speed and chaos of modern life in the backseat for a while? Sometimes, a little solitude buried in the pages of a good book is all you'll need. Visit with a friend over a super large double cappuccino or a fruit smoothie. Take a break from the everyday routine and pick up one of our award-winning desserts. You can do all these things at Books &amp; Beyond.
+                </p>
+            </section>
+        </div>
+
+        <!--
+            Like most semantic tags, you don't necessarily need them, but
+            they're nice when they're appropriate.
+        -->
+        <footer>
+            <!--
+                HTML has a very finite set of tags. Some of them really
+                aren't necessary, like address. Address and mailto (see
+                below) are often avoided as to avoid spammers. Then again,
+                anyone out to pick on you will probably have ways around
+                your anti-spam tricks.
+            -->
+            <address>
+                Books and Beyond<br/>
+                42 Not Really There St.<br/>
+                Somewhere, CA 00001<br/>
+                USA
+            </address>
+            <p>
+                <small>Contact: <a href="mailto:help@booksandbeyond.com">help@booksandbeyond.com</a></small>
+            </p>
+        </footer>
+
+    </body>
+</html>

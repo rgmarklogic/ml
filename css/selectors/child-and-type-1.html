@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Child and Type Selectors</title>
+    <meta charset="ISO-8859-1">
+    <style>
+/* The *-child selectors semantically translate to:
+   apply the styles to the children of the containing element. */
+/* This selector translates to the p that is a first child of any parent
+   element. */
+p:first-child {
+    color: red;
+}
+/* This selector translates to the p that is a second child of any parent
+   element. */
+p:nth-child(2) {
+    color: green;
+}
+/* This selector translates to every p that is an odd element. */
+p:nth-child(odd) {
+    font-style: italic;
+}
+/* This selector translates to any div that is the last child of an element.
+   in our page, the div is the last-child, hence the color applied to
+   all children is blue. */
+div:last-child {
+    color: blue;
+}
+    </style>
+</head>
+<body>
+	<div>
+	  <p>Foo (I am red)</p>
+	  <p>Foo (I am green)</p>
+	  <p>Foo (I am blue by ineritence)</p>
+	</div>
+</body>
+</html>

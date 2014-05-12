@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Selector Weight</title>
+
+	<style type="text/css">
+body {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+a {
+	color: black;
+	text-decoration: none;
+}
+.light-weight {
+    color: red;
+}
+.heavier.weight {
+    color: green;
+}
+#heaviest-weight {
+    color: blue;
+}
+.really-important {
+    color: orange !important;
+}
+	</style>
+</head>
+
+<body>
+
+	<h1>Books &amp; Beyond</h1>
+
+	<ul>
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+		<li>
+		    <a class="light-weight" href="http://gog.com">
+		        Gog.com
+		    </a>
+		</li>
+		<li>
+		    <a class="light-weight heavier weight" 
+		      href="http://www.w3schools.com/css/default.asp">
+	            W3 Schools CSS
+            </a>
+		</li>
+		<li>
+		    <a id="heaviest-weight" class="light-weight heavier weight" 
+		      href="http://en.wikiversity.org/wiki/Web_Design/CSS">
+		        Wikiversity CSS
+		    </a>
+		</li>
+		<li>
+		    <a class="heavier weight" style="color: red; color: purple;"
+		      href="http://yahoo.com" >
+		        Yahoo!
+		    </a>  
+		</li>
+		<li>
+		    <a class="really-important heavier weight"
+		      href="http://stackoverflow.com" >
+		        stackoverflow
+		    </a>
+		</li>
+	</ul>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pseudo Classes and Sibling Selectors</title>
+    <style>
+/* With pseudo class and sibling selectors, we can be creative. This might
+ * be more painful than it is worth in real life, but it shows how a
+ * multi-lingual form could be created using just a bit of CSS 3 and 
+ * some creative use of HTML organization.
+ */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-family: sans-serif;
+}
+header > h1 {
+    padding: 1em;
+    background-color: #eee;
+    margin: 0;
+    text-align: right;
+}
+form {
+    width: 600px;
+    margin: 1em auto;
+    box-shadow: 0.5em 0.5em 0.3em #ccc;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    padding: 1em;
+}
+input {
+    vertical-align: middle;
+}
+input:focus {
+    border: 2px solid #ffb773;
+    /* Turn off webkit focus. */
+    outline: none;
+}
+label {
+    display: inline-block;
+    min-width: 8em;
+}
+
+/* The following multi-lingualness works because all of the items we wish
+ * to hide/show occur _after_ the language fields, and are at the sibling
+ * level or deeper in the HTML hierarchy. This would not work if any of
+ * the HTML elements occurred before the language switch buttons. 
+ */
+
+/* Style the language select labels. */
+input[data-switch="lang"] + label {
+    min-width: 0;
+    color: #aaa;
+}
+input[data-switch="lang"]:checked + label {
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Style according to valid or invalid fields. */
+input:invalid + .valid {
+    display: none;
+}
+input:valid + .valid {
+    display: inline;
+    color: #00c12b;
+    font-size: 0.7em;
+}
+
+/* When displaying English. */
+input[type="radio"][value="en"]:checked ~ fieldset :lang(en),
+input[type="radio"][value="en"]:checked ~ label :lang(en),
+input[type="radio"][value="en"]:checked ~ span:lang(en) {
+    display: inline;
+}
+input[type="radio"][value="en"]:checked ~ fieldset :lang(de),
+input[type="radio"][value="en"]:checked ~ label :lang(de),
+input[type="radio"][value="en"]:checked ~ span:lang(de) {
+    display: none;
+}
+
+/* When displaying German. */
+input[type="radio"][value="de"]:checked ~ fieldset :lang(de),
+input[type="radio"][value="de"]:checked ~ label :lang(de),
+input[type="radio"][value="de"]:checked ~ span:lang(de) {
+    display: inline;
+}
+input[type="radio"][value="de"]:checked ~ fieldset :lang(en),
+input[type="radio"][value="de"]:checked ~ label :lang(en),
+input[type="radio"][value="de"]:checked ~ span:lang(en) {
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pseudo Classes and Sibling Selectors</h1>
+    </header>
+    <form action="javascript:void(0)">
+        <input type="radio" name="language" id="language-en" data-switch="lang" value="en" checked="checked"/><label for="language-en">English</label>
+        <input type="radio" name="language" id="language-de" data-switch="lang" value="de"/><label for="language-de">Deutsch</label>
+        <label>
+            <span lang="en">(Language Preference)</span>
+            <span lang="de">(Spracheinstellung festlegen)</span>
+        </label>
+        <br/>
+        <br/>
+        <fieldset>
+            <label for="name">
+                <span lang="en">Name:</span>
+                <span lang="de">Name:</span>
+            </label>
+            <input type="text" name="name" id="name" required="required"/>
+            <span class="valid">&#10003;</span>
+            <br/>
+            <label for="password">
+                <span lang="en">Password:</span>
+                <span lang="de">Passwort:</span>
+            </label>
+            <input type="password" name="password" id="password" required="required"/>
+            <span class="valid">&#10003;</span>
+            <br/>
+            <label for="secret-question">
+                <span lang="en">Secret answer:</span>
+                <span lang="de">Geheime Antwort:</span>
+            </label>
+            <!-- Note: this trick doesn't do well for select drop downs.
+                We use radio boxes here to compensate. -->
+            <br/>
+            <input type="radio" name="secret-answer" value="cat"/>
+                <span lang="en">Cat</span>
+                <span lang="de">die Katze</span>
+            <br/>
+            <input type="radio" name="secret-answer" value="dog"/>
+                <span lang="en">Dog</span>
+                <span lang="de">der Hund</span>
+        </fieldset>
+        <span lang="en"><input type="submit" value="login"/></span>
+        <span lang="de"><input type="submit" value="Anmelden"/></span>
+    </form>
+</body>
+</html>

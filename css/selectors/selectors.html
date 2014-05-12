@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Selectors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css" rel="stylesheet"/>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet"/>
+        <style id="example-code">
+/*  This file will be a collection of various and interesting CSS selectors
+    that I have found. Since there are many selector tricks found on the
+    web, this file might remain short unless I find combos I have not seen
+    elsewhere. */
+
+
+/*  The following block of selectors is a mix of newer HTML5 specific states
+    on form elements and the sibling selectors. I don't see the sibling
+    selectors used much, but I find them interesting in forms. Here we
+    have set up a single form input of the email type. The input, by nature
+    being an email type, has both an invalid and a valid state, represented
+    by the :invalid and :valid pseudo classes, respectively. A form field is
+    always in one of these two states.
+
+    The + selector means "a sibling element that is immediately following"
+    and the ~ selector means "any sibling element that is following."
+
+    With these two selectors, and organizing simple boxes that represent
+    valid and invalid, plus a bit of a CSS transitioning effect, the
+    following set of selectors does the following:
+
+        If the email field is in the valid state, show a green box and hide
+        a red box.
+
+        If the email field is in the invalid state, show a red box and
+        hide a green box.
+
+    Try typing an email (that, according to the browser looks like an email)
+    into the input field and watch the red box fade to a green box.
+
+    A better real life example is to use only one span, and switch
+    backgrounds, but I wouldn't be able to use both the + and the ~ selector
+    demonstrably with only one element. */
+input:invalid + .valid {
+    opacity: 0;
+}
+input:invalid ~ .invalid {
+    opacity: 1;
+}
+input:valid + .valid {
+    opacity: 1;
+}
+input:valid ~ .invalid {
+    opacity: 0;
+}
+.valid {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    background-color: green;
+
+    opacity: 0;
+
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+.invalid {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    background-color: red;
+
+    opacity: 0;
+
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+/*  Middle align the various inline elements in the form. */
+input, .valid, .invalid {
+    vertical-align: middle;
+}
+/*  The form layout is just a general layout to center the form and make it
+    more visible. */
+form {
+    background-color: white;
+    width: 400px;
+    margin: 2em auto;
+    padding: 1em;
+}
+        </style>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
+        <script>
+/*
+ * Source code, not programmatically generated. Used by the examples.
+ */
+$(document).ready(function() {
+    // Code highlighting produces an HTML string output.
+    var code = $("#example-code").html();
+    var highlighted = hljs.highlight( "css", code.trim() ).value
+    $("<div class='example-code-display'><p>Example Code<p><pre><code class='css'></code></pre></div>")
+        .find(".css")
+        // Insert our syntax highlighted code into the correct container.
+        .html(highlighted)
+        // Get back to the container div.
+        .parent().parent()
+        .appendTo("body");
+
+    // Insert the title into the page as the header dynamically.
+    // Allows me to write the title once since I'm writing the html by hand
+    // for right now.
+    $("<header><h1></h1></header>")
+        .find("h1")
+        .append( $("title").html() )
+        .parent()
+        .prependTo("body");
+});
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <div class="warning">
+                Example description is rendered dynamically with JavaScript. Please enable JavaScript to see the explanation.
+            </div>
+        </noscript>
+        <form action="javascript:void(0);" novalidate="novalidate">
+            <div class="field-row">
+                <input type="email" required="required" placeholder="youremail@test.com"/>
+                <span class="valid"></span>
+                <span class="invalid"></span>
+            </div>
+        </form>
+    </body>
+</html>
