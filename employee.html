@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+// 1) Create an Employee "class"/datatype
+//   name, title
+// 2) Write some classes into the HTML.
+// Purpose: exploring what this is in JavaScript.
+
+window.onload = function() {
+
+    var Employee = function(name, title) {
+        // Truthy and falsey.
+        // this = new Object();
+        this.name = name || "JSON";
+        this.title = title || "DBA";
+        // return this;
+    };
+    Employee.prototype.fullName = function() {
+        console.log("this function is being called with", this);
+        console.log("DEBUG", this.name + ", " + this.title);
+        return this.name + ", " + this.title;
+    };
+    //var notBob = Employee("not bob", "not the ceo");
+    //console.log(notBob);
+    var bob = new Employee("Bob", "CEO");
+    console.log(bob.fullName());
+
+//    document.getElementById("bob").addEventListener("click", bob.fullName);
+    document.getElementById("bob").addEventListener("click",
+        function() {
+            bob.fullName();
+        });
+
+};
+        </script>
+    </head>
+    <body>
+<button id="bob">Bob the CEO</button>
+    </body>
+</html>
+
+
+
+
+
+
+
+

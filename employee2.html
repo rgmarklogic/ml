@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+// scope (closure)
+// nested scopes + setting "private properties"
+window.onload = function() {
+    var Employee = function(name, title) {
+        var id = Math.random();
+
+        this.getId = function() {
+            return id;
+        };
+        this.setId = function(i) {
+            id = i;
+        };
+
+        this.name = name || "JSON";
+        this.title = title || "DBA";
+    };
+    Employee.prototype.fullName = function() {
+        console.log("this function is being called with", this);
+        console.log("DEBUG", this.name + ", " + this.title);
+        return this.name + ", " + this.title;
+    };
+    var bob = new Employee("Bob", "CEO");
+    console.log(bob.getId());
+    bob.setId("THE BOSS");
+    console.log(bob.getId());
+    console.log(bob.id);
+    bob.id = "THE KING";
+    console.log(bob.id);
+    console.log(bob.getId());
+
+    //------------------- Scope.
+    x = 100;
+    (function() {
+        var x = 42;
+
+        (function() {
+            console.log("x is", x);
+            x = 2000;
+        })();
+        console.log(x);
+        console.log("global x", window.x);
+
+        (function() {
+            var x = "1 billlionnnnn";
+        })();
+        console.log(x);
+
+        // variable hoisting
+        (function() {
+            var x;
+            x = "hello";
+            //var x = 20;
+            x = 20;
+        })();
+        console.log(x);
+    })();
+};
+        </script>
+    </head>
+    <body>
+<button id="bob">Bob the CEO</button>
+    </body>
+</html>
+
+
+
+
+
+
+
+
