@@ -49,4 +49,5 @@
    ] 
 }
 * messages without both a `user` or `message` param should return a status with `error` set to true, but should still return a 200.
+* when everything is working, write tests using a test framework (mocha and chai recommended) that test the datastructures of your requests and the error conditions.
 
