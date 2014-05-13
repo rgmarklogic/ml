@@ -6,7 +6,7 @@ $(document).ready(function() {
         return moment(date).fromNow();
     });
 
-    var apiURL = "http://bro.jeremyosborne.com/api/messagebro";
+    var apiURL = "/chat";
 
     // Pub/Sub interface.
     var events = $({});
@@ -86,3 +86,4 @@ $(document).ready(function() {
     // Notify on startup.
     $("<span>welcome to chat</span>").notify();
 });
+
