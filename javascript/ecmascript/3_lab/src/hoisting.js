@@ -5,14 +5,13 @@ var messenger = {
 };
 
 exports.messenger = (function() {
-        
     if (!messenger) {
-        var messenger = {
+        messenger = {
             log: function() {
                 return "log message override.";
             },
         };
     }
-    
+
     return messenger;
 })();

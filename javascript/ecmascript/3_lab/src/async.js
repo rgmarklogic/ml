@@ -4,3 +4,7 @@ exports.delay = function(cb) {
         cb(Date.now() - start);
     }, 10);
 };
+
+exports.delay(function(dt) {
+    console.log(dt);
+});

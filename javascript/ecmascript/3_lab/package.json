@@ -7,6 +7,6 @@
     },
     "private": true,
     "scripts": {
-        "test": "node_modules/nodeunit/bin/nodeunit test/"
+        "test": "node node_modules/nodeunit/bin/nodeunit test/"
     }
 }

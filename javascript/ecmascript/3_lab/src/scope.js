@@ -1,13 +1,13 @@
 exports.blockscope = function() {
-    var i = "status";
-    
+    var x = "status";
+
     for (var i = 0; i < 10; i++) {
         if (typeof i == "number") {
             break;
         }
     }
 
-    return i;
+    return x;
 };
 
 

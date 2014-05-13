@@ -17,7 +17,7 @@ window.onload = function() {
     var AwesomeForm = function(el) {
         var self = this;
 
-        this.note = Note;
+        //this.note = Note;
         // TODO: setup the event listener so it correctly references this
 
         // What is the this in onsubmit?
@@ -35,7 +35,8 @@ window.onload = function() {
         e.preventDefault();
 
         t = el.querySelector("textarea").value;
-        document.querySelector("#notes").innerHTML += (new this.note(t)).render();
+        //document.querySelector("#notes").innerHTML += (new this.note(t)).render();
+        document.querySelector("#notes").innerHTML += (new Note(t)).render();
     };
 
     var af = new AwesomeForm(document.querySelector("form"));
