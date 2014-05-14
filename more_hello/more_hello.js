@@ -13,6 +13,7 @@ var parseReqURL = function(req, res, next) {
     var filepath = url.parse(req.url).pathname.slice(1);
     next(null, req, res, filepath);
 };
+exports.parseReqURL = parseReqURL;
 
 var readFileFromDisk = function(req, res, filepath, next) {
     fs.readFile(filepath, function(err, buffer) {
@@ -24,6 +25,7 @@ var readFileFromDisk = function(req, res, filepath, next) {
         }
     });
 };
+exports.readFileFromDisk = readFileFromDisk;
 
 var sendResponse = function(err, req, res, buffer) {
     if (err) {
@@ -45,18 +47,19 @@ var sendResponse = function(err, req, res, buffer) {
 // Implement these functions using async.waterfall inside of
 // the http.createServer callback to serve the files requested.
 // If the file is not found, send out hello Errror.
-http.createServer(function (req, res) {
-    async.waterfall([
-        function(next) {
-            next(null, req, res);
-        },
-        parseReqURL,
-        readFileFromDisk
-    ], sendResponse);
-}).listen(1337, '127.0.0.1');
-
-console.log('Server running at http://127.0.0.1:1337/');
-
+// https://github.com/jeremyosborne/ml/tree/master/more_hello
+if (require.main === module) {
+    http.createServer(function (req, res) {
+        async.waterfall([
+            function(next) {
+                next(null, req, res);
+            },
+            parseReqURL,
+            readFileFromDisk
+        ], sendResponse);
+    }).listen(1337, '127.0.0.1');
+    console.log('Server running at http://127.0.0.1:1337/');
+}
 
 /*
 async.waterfall([
