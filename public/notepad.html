@@ -34,15 +34,25 @@ This page is not designed to work without JavaScript.
         </footer>
         <script>
 var app = angular.module('app', []);
-app.controller("MessageController", function($scope) {
-    $scope.messages = [
-        "hello world",
-        "marklogic",
-        "goodbye world!!!!!"
-    ];
+app.controller("MessageController", function($scope, $http) {
+    $http.get("/messages")
+        .then(function(response) {
+            $scope.messages = response.data;
+        }, function() {
+            console.error("OH NOES!", arguments);
+        });
 
     $scope.newMessage = function() {
-        $scope.messages.push($scope.inputmessage);
+        //$scope.messages.push($scope.inputmessage);
+
+        $http.post("/messages", { message: $scope.inputmessage })
+            .then(function(response) {
+                if (response.data.message) {
+                $scope.messages.push(response.data.message);
+                }
+            }, function() {
+                console.error("OH NOES!", arguments);
+            });
     };
 });
 
