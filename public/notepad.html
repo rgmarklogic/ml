@@ -17,15 +17,47 @@ This page is not designed to work without JavaScript.
         <header id="page-header">
             <h1>Notepad</h1>
         </header>
-        <section id="page-body">
-
+        <section id="page-body" ng-controller="MessageController">
+            <form ng-submit="newMessage()">
+                <input type="text"
+                       name="message"
+                       ng-model="inputmessage"
+                       placeholder="new message here"/>
+                <input type="submit"/>
+            </form>
+            <ul>
+                <li ng-repeat="message in messages track by $index">{{message}}</li>
+            </ul>
         </section>
         <footer id="page-footer">
             Use this code as you wish.
         </footer>
         <script>
 var app = angular.module('app', []);
+app.controller("MessageController", function($scope) {
+    $scope.messages = [
+        "hello world",
+        "marklogic",
+        "goodbye world!!!!!"
+    ];
+
+    $scope.newMessage = function() {
+        $scope.messages.push($scope.inputmessage);
+    };
+});
+
+
+//var ul = document.querySelector("#page-body ul");
+//for (var i = 0; i < messages.legth; i++) {
+//    var el = document.createElement("li");
+//    el.innerHTML = messages[i];
+//    ul.appendChild(el);
+//}
+
         </script>
     </body>
 </html>
+
+
+
 
